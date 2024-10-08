@@ -1,0 +1,28 @@
+A professora não explica direito as coisas e faz coisas em off, eu não consegui fazer a ligação com o Azure então fiz direto do MYSQL, abaixo segue as consultas utilizadas
+
+
+select
+	p.Pname,
+    w.Essn,
+    concat(d.Dname, ' - ', p.Plocation) as Departament_Location
+from
+	project p
+    inner join works_on w on p.Pnumber = w.Pno
+    inner join departament d on d.Dnumber = p.Dnum
+
+
+
+
+select
+	concat(e.Fname, ' ', e.Lname) as EmployeeName,
+    e.Bdate,
+    e.Ssn,
+    d.Dname,
+	CASE
+		WHEN e.Super_ssn is null
+        then e.Super_ssn = e.Ssn
+        ELSE e.Super_ssn
+	END as Super_ssn
+from
+	employee e
+    inner join departament d on d.Dnumber = e.Dno;
